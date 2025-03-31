@@ -1,0 +1,147 @@
+{% extends "base.html" %} {% block title%} PATIENTS {% endblock title%} {% block
+body %}
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card" style="width: 23rem">
+        <img src="static/dr.avif" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">HOSPITAL DOCTORS</h5>
+          <p class="card-text">Doctors names</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">An item</li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Contact Us</a>
+          <a href="#" class="card-link">About Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div
+        style="
+          width: 500px;
+          margin: auto;
+          padding: 20px;
+          border: 2px solid #ccc;
+          border-radius: 10px;
+          background-color: #f9f9f9;
+        "
+        class="col bg-secondary-subtle border rounded text-left"
+      >
+        <h2 style="text-align: center"><u>Book Your Slot</u></h2>
+        {% with messages=get_flashed_messages(with_categories=True) %} {% if
+        messages %} {% for category,message in messages %}
+        <div
+          class="alert alert-{{category}} alert-dismissible fade show"
+          role="alert"
+        >
+          {{message}}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        {% endfor %} {% endif %} {% endwith %}
+        <div>
+          <form action="/patients" method="POST">
+            <div style="margin-bottom: 10px; display: flex">
+              <label
+                style="width: 235px; padding-top: 10px; align-items: center"
+                >Email:</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                value="{{current_user.email}}"
+                name="email"
+                required
+              />
+            </div>
+            <div style="margin-bottom: 10px">
+              <label style="display: inline-block; width: 150px"
+                >Full Name:</label
+              >
+              <input type="text" name="full_name" required />
+            </div>
+            <div style="margin-bottom: 10px">
+              <label style="display: inline-block; width: 150px">Gender:</label>
+              <select name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 10px">
+              <label style="display: inline-block; width: 150px">Date:</label>
+              <input type="date" name="date" required />
+            </div>
+            <div style="margin-bottom: 10px">
+              <label style="display: inline-block; width: 150px">Slot:</label>
+              <select name="slot" required>
+                <option value="Morning">Morning</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="Evening">Evening</option>
+              </select>
+            </div>
+            <div style="margin-bottom: 10px">
+              <label style="display: inline-block; width: 150px">Timing:</label>
+              <input type="time" name="timing" required />
+            </div>
+            <div style="margin-bottom: 10px">
+              <label style="display: inline-block; width: 150px"
+                >Disease:</label
+              >
+              <input type="text" name="disease" required />
+            </div>
+            <div style="margin-bottom: 10px">
+              <label style="display: inline-block; width: 150px"
+                >Department:</label
+              >
+              <select name="doctor_dep" required>
+                <option selected>Select Doctor Department</option>
+                {% for d in doct %}
+                <option value="{{d.dept}}">{{d.dept}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div style="margin-bottom: 10px">
+              <label style="display: inline-block; width: 150px"
+                >Phone No:</label
+              >
+              <input type="tel" name="phone" required />
+            </div>
+            <div style="margin-bottom: 10px">
+              <label style="display: inline-block; width: 150px"
+                >Address:</label
+              >
+              <textarea name="address" required></textarea>
+            </div>
+            <div style="text-align: center; margin-top: 15px">
+              <button
+                type="submit"
+                style="padding: 5px 15px"
+                class="btn btn-success btn-sm btn-block"
+              >
+                Book
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock body %}
+</div>

@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block title%} Triggers {% endblock title%} {% block
+body%} {% with messages=get_flashed_messages(with_categories=True) %} {% if
+messages %} {% for category,message in messages %}
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{% endfor %} {% endif %} {% endwith %}
+
+<div class="container mt-4">
+  <table class="table">
+    <thead class="table-light">
+      <tr>
+        <th>TID</th>
+        <th>PID</th>
+        <th>EMAIL</th>
+        <th>NAME</th>
+        <th>ACTION</th>
+        <th>TIMESTAMP</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <td scope="row">{{post.tid}}</td>
+        <td>{{post.pid}}</td>
+        <td>{{post.email}}</td>
+        <td>{{post.name}}</td>
+        <td>{{post.action}}</td>
+        <td>{{post.timestamp}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock body %}
